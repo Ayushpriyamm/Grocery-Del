@@ -12,6 +12,12 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`✅app is running on port ${PORT}`);
-})  
+try {
+    app.listen(PORT, () => {
+       
+        console.log(`✅app is running on port ${PORT}`);   
+})   
+} catch (error) {
+    console.log("❌server start failed",error)
+}
+
