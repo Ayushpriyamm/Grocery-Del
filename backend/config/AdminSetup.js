@@ -7,6 +7,8 @@ import Admin from "../src/models/AdminModel.js";
 import Store from "../src/models/storeModel.js";
 import Category from "../src/models/categoryModel.js";
 import Product from "../src/models/product.js";
+import Order from "../src/models/orderModel.js";
+import Counter from "../src/models/counterModel.js";
 import { COOKIE_PASSWORD, sessionStore, authenticate } from "./adminConfig.js";
 
 AdminJS.registerAdapter(AdminJSMongoose);
@@ -55,6 +57,13 @@ export const admin = new AdminJS({
                 listProperties: ["name","image","description","category","stocks"],
                 filterProperties: ["name","image","description","category","stocks"]
             }
+        },
+
+        {
+         resource: Order, // Register the Order model
+        },
+        {
+         resource: Counter, // Register the Order model
         },
     ],
     branding: {
