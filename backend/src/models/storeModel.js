@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import DeliveryBoy from "./deliveryBoy";
+
 
 const storeSchema = new mongoose.Schema({
     name: {
