@@ -9,7 +9,7 @@ const MongoDBStore = connectMongoDBSession(ExpressSession);
 // Create a session store
 export const sessionStore = new MongoDBStore({
     uri: process.env.MONGODB_URI,
-    collection: 'session' // Corrected from 'Collection' to 'collection'
+    collection: 'session' 
 });
 
 sessionStore.on("error", (error) => {
@@ -17,7 +17,7 @@ sessionStore.on("error", (error) => {
 });
 
 export const authenticate = async (email, password) => {
-    console.log("Authenticating:", email); // Log authentication attempts
+    console.log("Authenticating:", email); 
     if (email === process.env.Admin_EMAIL && password === process.env.Admin_PASSWORD) {
         return Promise.resolve({ email: email, password: password });
     } else {
