@@ -1,9 +1,8 @@
-import { Stack } from "expo-router";
+import Navigation from "@/src/navigation/Navigation";
+
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" />
-    </Stack>
+    <Navigation />
   );
 }

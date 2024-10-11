@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 const Navigation: FC = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator
         initialRouteName="SplashScreen"
         screenOptions={{
