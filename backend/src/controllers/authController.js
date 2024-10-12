@@ -10,7 +10,7 @@ export const signup =async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(404).json({ errors: errors.array() });
+        return res.status(501).json({ errors: errors.array() });
     }
 
     const { name, mobile, password } = req.body;
@@ -51,7 +51,13 @@ export const signup =async (req, res, next) => {
 }
 
 
-export const signin = async(req,res) => {
+export const signin = async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(501).json({ errors: errors.array() });
+    }
+    
     const { mobile, password } = req.body;
 
     if (!mobile) {
