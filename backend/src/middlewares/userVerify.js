@@ -1,16 +1,20 @@
-import jwt, { verify } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js';
 
 export const verifyUser = async(req,res,next) => {
     let token;
 
-    if (req.headers.authorization && req.headers.authorization.startswith('Bearer')) {
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
        try {
            token = req.headers.authorization.split(' ')[1];
 
            const decode = jwt.verify(token, process.env.JWT_SECRET);
 
            req.user = await User.findById(decode.userId).select('-password');
+
+           if (!req.user) {
+              res.status(404).json({message:"user not exist"}) 
+           }
 
            next()
         } catch (error) {

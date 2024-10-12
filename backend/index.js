@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/dbConfig.js";
 import { admin, buildAdminRouter } from "./config/adminSetup.js";
-import userRoute from './src/routes/authRoute.js'
+import authRoute from './src/routes/authRoute.js'
+import userRoute from './src/routes/userRoute.js'
 
 dotenv.config();
 
@@ -25,7 +26,9 @@ app.get('/', (req, res) => {
 
 //signup route
 
-app.use('/auth/user',userRoute)
+app.use('/api/auth', authRoute)
+
+app.use('/api/user', userRoute);
 
 // Set the port
 const PORT = process.env.PORT || 5000;
