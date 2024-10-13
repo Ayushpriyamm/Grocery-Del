@@ -47,7 +47,7 @@ const deliverBoySchema = new mongoose.Schema({
         ref:"Store"
     }
 
-},{timestamps:true})
+})
 
 const DeliveryBoy = mongoose.model("DeliveryBoy", deliverBoySchema);
 
