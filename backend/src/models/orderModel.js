@@ -33,6 +33,7 @@ const orderSchema =new mongoose.Schema({
             },
             count: {
                 type: Number,
+                default:1,
                 required:true 
             }
         }
@@ -68,12 +69,12 @@ const orderSchema =new mongoose.Schema({
     deliveryPersonLocation: {
         lattitude: {
             type: Number,
-            required:true,
+            
             
         },
         longitude: {
             type: Number,
-            required:true,
+            
         },
         address: {
             type: String,

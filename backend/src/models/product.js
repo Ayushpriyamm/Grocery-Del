@@ -19,9 +19,15 @@ const productSchema = new mongoose.Schema({
         type: String,
     },
 
+    price: {
+        type: Number,
+        required:true
+    },
+
     stocks: {
         type: Number,
     },
+
 
 });
 

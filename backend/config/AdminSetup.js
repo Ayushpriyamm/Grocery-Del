@@ -54,13 +54,17 @@ export const admin = new AdminJS({
         {
             resource: Product,
             options: {
-                listProperties: ["name","image","description","category","stocks"],
-                filterProperties: ["name","image","description","category","stocks"]
+                listProperties: ["name","image","category","stocks","price"],
+                filterProperties: ["name","image","category","stocks","price"]
             }
         },
 
         {
-         resource: Order, // Register the Order model
+            resource: Order,
+            options: {
+                listProperties: ["orderId", "customer", "items", "totalPrice", "address", "status"],
+                filterProperties: ["status","orderId","address"]
+            }
         },
         {
          resource: Counter, // Register the Order model

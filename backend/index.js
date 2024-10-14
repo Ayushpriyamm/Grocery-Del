@@ -5,7 +5,8 @@ import { admin, buildAdminRouter } from "./config/adminSetup.js";
 import authRoute from './src/routes/authRoute.js'
 import userRoute from './src/routes/userRoute.js'
 import productRoute from './src/routes/productRoute.js';
-import categoryRoute from './src/routes/categoryRoute.js'
+import categoryRoute from './src/routes/categoryRoute.js';
+import orderRoute from './src/routes/orderRoute.js';
 
 dotenv.config();
 
@@ -35,6 +36,8 @@ app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 
 app.use('/api/catergory', categoryRoute);
+
+app.use('/api/order', orderRoute);
 
 // Set the port
 const PORT = process.env.PORT || 5000;

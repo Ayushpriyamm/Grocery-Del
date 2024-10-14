@@ -59,12 +59,7 @@ export const updateUser = async (req, res) => {
 
         res.status(200).json({
             message: "User details updated successfully",
-            user: {
-                id: updatedUser._id,
-                name: updatedUser.name,
-                mobile: updatedUser.mobile,
-                role: updatedUser.role
-            }
+            updatedUser
         });
         
         
