@@ -50,7 +50,8 @@ export const updateUser = async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(
             userId,
             { $set: updatedFeilds },
-            {new:true,runValidators:true}
+            { new: true, runValidators: true },
+            
         )
 
         if (!updateUser) {
