@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/dbConfig.js";
-import { admin, buildAdminRouter } from "./config/adminSetup.js";
+import { admin, buildAdminRouter } from "./config/AdminSetup.js";
 import authRoute from './src/routes/authRoute.js'
 import userRoute from './src/routes/userRoute.js'
 import productRoute from './src/routes/productRoute.js';
@@ -24,7 +24,7 @@ buildAdminRouter(app);
 
 // Define a simple route
 app.get('/', (req, res) => {
-    res.send("API is running...");
+  res.send("API is running...");
 });
 
 //signup route
@@ -44,5 +44,5 @@ const PORT = process.env.PORT || 5000;
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`✅ App is running on http://localhost:${PORT}${admin.options.rootPath}`);
+  console.log(`✅ App is running on http://localhost:${PORT}${admin.options.rootPath}`);
 });
