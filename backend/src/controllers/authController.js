@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { generateToken } from "../utlis/generateToken.js";
+import DeliveryBoy from "../models/deliveryBoy.js";
 
 
 
@@ -31,7 +32,7 @@ export const signup =async (req, res, next) => {
             password:hashedPassword,
         })
 
-        const token = generateToken(newUser._id);
+        const token = generateToken(newUser._id,newUser.role);
         
         res.status(200).json({
             token,
@@ -86,6 +87,51 @@ export const signin = async (req, res) => {
              user     
         })
 
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
+export const deliveryBoy = async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(501).json({ errors: errors.array()});
+    }
+    const { mobile, password } = req.body;
+
+    if (!mobile) {
+        return res.status(400).json({message:"Please enter your mobile number"})
+    }
+    if (!password) {
+        return res.status(400).json({message:"Please enter password"})
+    }
+
+    if (!mobile && !password) {
+        return res.status(400).json({message:"Both the feilds are required"})
+    }
+
+    try {
+        const deliveryBoy = await DeliveryBoy.findOne({ mobile:mobile });
+
+        if (!deliveryBoy) {           
+            res.status(400).json({ message: "Delivery partner not exist" });      
+        }
+
+        else if (password !== deliveryBoy.password) {
+            res.status(400).json({ message: "Please enter correct password" });
+        }
+        else {
+            const token = generateToken(deliveryBoy._id);
+            res.status(200).json({
+             token,
+             message: "Signin Successfull",
+             deliveryBoy     
+        })
+
+        }
+        
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

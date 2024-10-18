@@ -15,6 +15,7 @@ export const createOrder = async(req,res) => {
             })
         }
 
+
         const totalPrice=await CalculateTotalPrice(items)
 
         const customerData = await User.findById(userId);
@@ -69,5 +70,9 @@ export const createOrder = async(req,res) => {
             error:error.message
         })
     }
+    
+}
+
+export const getOrder = async (req, res) => {
     
 }
