@@ -7,6 +7,7 @@ import userRoute from './src/routes/userRoute.js'
 import productRoute from './src/routes/productRoute.js';
 import categoryRoute from './src/routes/categoryRoute.js';
 import orderRoute from './src/routes/orderRoute.js';
+import locationRoute from './src/routes/userAddressRoute.js'
 
 dotenv.config();
 
@@ -38,6 +39,8 @@ app.use('/api/product', productRoute);
 app.use('/api/catergory', categoryRoute);
 
 app.use('/api/order', orderRoute);
+
+app.use('/api/location', locationRoute);
 
 // Set the port
 const PORT = process.env.PORT || 5000;
