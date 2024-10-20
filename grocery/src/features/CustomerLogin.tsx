@@ -12,6 +12,7 @@ import CustomButton from './CustomButton';
 import useKeyboardOffsetHeight from '@/hooks/useKeyboardOffsetHeight';
 import { Colors } from '@/constants/Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 export const CustomerLogin: FC = () => {
@@ -35,6 +36,7 @@ export const CustomerLogin: FC = () => {
     Keyboard.dismiss();
     setLoading(true);
     resetAndNavigate('ProductDashboard');
+    setLoading(false);
     try {
 
     } catch (error) {
@@ -84,10 +86,11 @@ export const CustomerLogin: FC = () => {
                   }]
                 }}
                 keyboardDismissMode={'on-drag'}>
+                <LinearGradient colors={bottomColors} style={styles.gradient} />
                 <View style={styles.content}>
                   <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
                   <CustomText variant='h2' fontFamily={Fonts.SemiBold}>
-                    Faridabad's last minute app
+                    India's last minute app
                   </CustomText>
                   <CustomText variant='h5' fontFamily={Fonts.SemiBold} style={styles.text}>
                     Login or Signup
