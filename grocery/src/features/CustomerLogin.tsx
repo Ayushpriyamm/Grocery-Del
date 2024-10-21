@@ -10,7 +10,7 @@ import { Fonts, lightColors } from '../utils/Constants';
 import { useFonts } from 'expo-font';
 import CustomButton from './CustomButton';
 import useKeyboardOffsetHeight from '@/hooks/useKeyboardOffsetHeight';
-import { Colors } from '@/constants/Colors';
+import { Colors } from '../../constants/Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { LinearGradient } from 'expo-linear-gradient';
 
