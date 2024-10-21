@@ -1,19 +1,23 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet,TouchableOpacity } from "react-native";
 import CustomText from "./CustomText";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Fonts } from "../utils/Constants";
-import { FC } from "react";
+import { FC, SetStateAction,Dispatch} from "react";
+
+
 
 interface CategoryCardProps {
   name: string;
   path: any; 
+  active : boolean;
+  setActive : Dispatch<SetStateAction<boolean>>
 }
 
-export const CategoryCard: FC<CategoryCardProps> = ({ name, path }) => {
+export const CategoryCard: FC<CategoryCardProps> = ({ name, path,active,setActive }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => setActive(!active)}>
       <Image 
-        source={require("../../assets/category/1.png")} 
+        source={path} 
         style={styles.image} 
         resizeMode="cover" 
       />
@@ -24,7 +28,8 @@ export const CategoryCard: FC<CategoryCardProps> = ({ name, path }) => {
       >
         {name}
       </CustomText>
-    </View>
+    </TouchableOpacity>
+
   );
 }
 
@@ -38,9 +43,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   image: {
-    width: 80,
+    width: 60,
     borderRadius: RFValue(60),
-    height: 80,
+    height: 60,
   }
 });
 

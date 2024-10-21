@@ -13,7 +13,7 @@ const StickSearchBar = () => {
 }
 const styles = StyleSheet.create({
   parent: {
-    marginTop : 40,
+    marginTop : 20,
     flex: 0.2,
     alignItems: 'center',
     justifyContent: 'center'

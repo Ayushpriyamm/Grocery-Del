@@ -5,6 +5,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { Fonts } from "../utils/Constants";
 import Animated from "react-native-reanimated";
 
+
 interface ProductCardProps {
   name : string,
   image : any,
@@ -22,7 +23,7 @@ export const ProductCard: FC<ProductCardProps> = ({name,image,price}) => {
   return (
     <View style={styles.container}>
       <Animated.Image
-        source={require("../../assets/products/1.png")} style={styles.image} />
+        source={image} style={styles.image} />
       <CustomText fontSize={RFValue(10)} variant="h3" fontFamily={Fonts.SemiBold}>{name}</CustomText>
       <CustomText>200g</CustomText>
       <View style={styles.subcontainer}>

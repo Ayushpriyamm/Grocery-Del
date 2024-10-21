@@ -7,12 +7,15 @@ import DeliveryLogin from "../features/DeliveryLogin";
 import { navigationRef } from "../utils/NavigationUtil";
 import ProductDashboard from "../features/ProductDashboard";
 import DeliveryDashboard from "../features/DeliveryDashboard";
+
+
 const Stack = createNativeStackNavigator();
 
 
 const Navigation: FC = () => {
   return (
-    <NavigationContainer ref={navigationRef} independent={true}>
+
+  <NavigationContainer ref={navigationRef} independent={true}>
       <Stack.Navigator
         initialRouteName="SplashScreen"
         screenOptions={{
