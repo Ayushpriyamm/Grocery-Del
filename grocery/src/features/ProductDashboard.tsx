@@ -16,6 +16,7 @@ import { AdCarousel } from "./AdCarousel";
 import { categories, imageData } from "../utils/dummyData";
 import StickyBottomModal from "./StickyBottomModal";
 import BottomSheet from "@gorhom/bottom-sheet";
+import BottomNavigation from "./BottomNavigation";
 
 const NOTICE_HEIGHT = -(NoticeHeight + 12);
 
@@ -63,6 +64,7 @@ export const ProductDashboard: FC = () => {
   }
 
   return (
+    <>
     <ScrollView scrollEnabled={true} style={styles.screen}>
       <NoticeAnimation noticePosition={noticePosition}>
         <>
@@ -121,6 +123,8 @@ export const ProductDashboard: FC = () => {
        </NoticeAnimation>   
       <AdCarousel/>
     </ScrollView>
+    <BottomNavigation />
+    </>
   );
 };
 

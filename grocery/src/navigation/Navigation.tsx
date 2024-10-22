@@ -7,6 +7,7 @@ import DeliveryLogin from "../features/DeliveryLogin";
 import { navigationRef } from "../utils/NavigationUtil";
 import ProductDashboard from "../features/ProductDashboard";
 import DeliveryDashboard from "../features/DeliveryDashboard";
+import SearchPage from "../features/SearchPage";
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ const Navigation: FC = () => {
           }}
           name="DeliveryLogin"
           component={DeliveryLogin} />
+        <Stack.Screen name="Search"   component={SearchPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )

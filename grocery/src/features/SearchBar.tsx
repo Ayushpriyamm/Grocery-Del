@@ -1,12 +1,12 @@
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from "expo-linear-gradient";
 import { lightColors } from "../utils/Constants";
 import CustomInput from "./CustomInput";
 
-export const SearchBar = () => {
+export const SearchBar : FC = () => {
   const [search, setSearch] = useState<any>('');
   return (
     <TouchableOpacity style={styles.container} activeOpacity={1}>
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 15,
     height : 70,
-    width: '80%',
+    paddingHorizontal : 4,
+    width: '100%',
   }
 })
 export default SearchBar;
