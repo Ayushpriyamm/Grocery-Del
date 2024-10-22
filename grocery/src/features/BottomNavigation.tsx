@@ -21,11 +21,11 @@ export const BottomNavigation = () => {
       </TouchableOpacity> 
       <TouchableOpacity onPress={() => handleNavigation("Search")} style={styles.bottomItemView}>
         <AntDesign name="search1" size={24} color={active === "Search" ? "#FFAA02" : "black"} />
-        <Text style={styles.bottomItemText}>Search</Text>
+        <CustomText fontSize={RFValue(12)} fontFamily={Fonts.SemiBold}>Search</CustomText> 
       </TouchableOpacity>
      <TouchableOpacity onPress={() => handleNavigation("Orders")} style={styles.bottomItemView}>
        <Feather name="shopping-bag" size={24} color={active === "Orders" ? "#FFAA02" : "black"} />
-        <Text style={styles.bottomItemText}>My Orders</Text>
+       <CustomText fontSize={RFValue(12)} fontFamily={Fonts.SemiBold}>My Orders</CustomText> 
       </TouchableOpacity>
     </View>
   );

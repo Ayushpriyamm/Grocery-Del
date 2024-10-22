@@ -3,6 +3,9 @@ import CustomText from "./CustomText";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Fonts } from "../utils/Constants";
 import { FC, SetStateAction,Dispatch} from "react";
+import BottomNavigation from "./BottomNavigation";
+import StickyBottomModal from "./StickyBottomModal";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 
 
@@ -14,7 +17,14 @@ interface CategoryCardProps {
 }
 
 export const CategoryCard: FC<CategoryCardProps> = ({ name, path,active,setActive }) => {
+ const tapGesture = Gesture.Tap().onEnd(() => {
+    setActive((prevActive) => !prevActive); // Toggle the active state on tap
+  });
+
+
   return (
+    <>
+   
     <TouchableOpacity style={styles.container} onPress={() => setActive(!active)}>
       <Image 
         source={path} 
@@ -28,8 +38,8 @@ export const CategoryCard: FC<CategoryCardProps> = ({ name, path,active,setActiv
       >
         {name}
       </CustomText>
-    </TouchableOpacity>
-
+    </TouchableOpacity> 
+    </>
   );
 }
 

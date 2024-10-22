@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { StyleSheet, Animated as RNAnimated, View, ScrollView } from "react-native";
+import { StyleSheet, Animated as RNAnimated, View,Button, ScrollView } from "react-native";
 import NoticeAnimation from "./NoticeAnimation";
 import { NoticeHeight, screenHeight, screenWidth } from "./Scaling";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,22 +14,22 @@ import { Fonts } from "../utils/Constants";
 import CategoryCard from "./CategoryCard";
 import { AdCarousel } from "./AdCarousel";
 import { categories, imageData } from "../utils/dummyData";
-import StickyBottomModal from "./StickyBottomModal";
-import BottomSheet from "@gorhom/bottom-sheet";
 import BottomNavigation from "./BottomNavigation";
+import { GestureDetector, Gesture, GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from "@gorhom/bottom-sheet";
 
 const NOTICE_HEIGHT = -(NoticeHeight + 12);
 
 export const ProductDashboard: FC = () => {
   const [active, setActive] = useState<boolean>(false);
   const noticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current;
-
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetchanges', index);
+ const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
   }, []);
-  
-  const bottomRef = useRef<BottomSheet>(null);
-  
+ const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
   const slideUp = () => {
     RNAnimated.timing(noticePosition, {
       duration: 1200,
@@ -63,15 +63,22 @@ export const ProductDashboard: FC = () => {
     return () => clearTimeout(timeoutId);
   }
 
-  return (
-    <>
-    <ScrollView scrollEnabled={true} style={styles.screen}>
+   return (
+    <BottomSheetModalProvider>
+      <GestureHandlerRootView>
       <NoticeAnimation noticePosition={noticePosition}>
         <>
           <Visuals />
           <SafeAreaView />
           <AnimatedHeader showNotice={showNotice} />
           <StickSearchBar />
+        </>
+      </NoticeAnimation> 
+
+      <AdCarousel />
+
+      <ScrollView style={styles.screen}>
+        <View style={styles.productContainer}>
           <View style={styles.text}>
             <CustomText
               variant="h1"
@@ -99,6 +106,9 @@ export const ProductDashboard: FC = () => {
               ))}
             </View>
           </ScrollX>
+        </View>
+
+        <View style={styles.categoryContainer}>
           <CustomText
             variant="h1"
             style={styles.categoryText}
@@ -106,34 +116,54 @@ export const ProductDashboard: FC = () => {
             fontSize={RFValue(15)}>
             Shop By Categories
           </CustomText>
+
           <ScrollX> 
             <View style={styles.panelContainer}> 
               {categories.map((data: any, index: any) => (
-                <CategoryCard
-                  active={active}
-                  setActive={setActive}
-                  key={index} 
-                  name={data.name}
-                  path={data.image} 
-                /> 
+                  <>
+              <Button
+                onPress={handlePresentModalPress}
+               title="Present Modal"
+                color="black"
+              />
+                  <CategoryCard
+                    key={index}
+                    active={active}
+                    setActive={setActive}
+                    name={data.name}
+                    path={data.image} 
+                  /> 
+              </>
               ))}
             </View>
-          </ScrollX>
-        </>
-       </NoticeAnimation>   
-      <AdCarousel/>
-    </ScrollView>
-    <BottomNavigation />
-    </>
+          </ScrollX>  
+        </View>
+      </ScrollView>
+   <BottomSheetModal
+          ref={bottomSheetModalRef}
+          onChange={handleSheetChanges}
+        >
+          <BottomSheetView>
+            <CustomText>Awesome 🎉</CustomText>
+          </BottomSheetView>
+        </BottomSheetModal>
+      <BottomNavigation />
+      </GestureHandlerRootView>
+    </BottomSheetModalProvider>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
-    
+    marginTop: 30,    
   },
-  contentContainer: {
-    
+  productContainer: {
+    flexDirection: 'column',
+    height: screenHeight * 0.4,
+  },
+  categoryContainer: {
+    flexDirection: "column",
+    height: screenHeight * 0.25,
   },
   panelContainer: {
     flexDirection: 'row',
@@ -155,10 +185,6 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     paddingHorizontal: 4,
-  },
-  transparent: {
-    padding: 10,
-    backgroundColor: "transparent",
   },
 });
 

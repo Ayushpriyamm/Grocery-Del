@@ -21,7 +21,7 @@ export const AdCarousel = () => {
 
   return (
     <View style={styles.container}>
-      <PagerView ref={pagerRef} style={styles.imageContainer} initialPage={0}>
+      <PagerView ref={pagerRef}  style={styles.imageContainer} initialPage={0}>
         {adData.map((data: any, key: number) => (
           <View key={key}>
             <Image style={styles.img} source={data} />
@@ -34,7 +34,7 @@ export const AdCarousel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    margin : 4,
     height: '25%',
     backgroundColor: 'white',
   },

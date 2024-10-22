@@ -1,5 +1,5 @@
-import ProductDashboard from "@/src/features/ProductDashboard";
+import ProductDashboard from "@/src/features/ProductDashboard"
 
-export default function Product(){
+export const Product = () => {
   return <ProductDashboard/>
 }

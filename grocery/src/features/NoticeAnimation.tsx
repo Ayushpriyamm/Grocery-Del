@@ -8,7 +8,7 @@ interface NoticeAnimationProps {
 }
 
 
-const NOTICE_HEIGHT = -(NoticeHeight + 10)
+const NOTICE_HEIGHT = -(NoticeHeight + 12)
 
 export const NoticeAnimation: FC<NoticeAnimationProps> = ({ noticePosition, children }) => {
   return (

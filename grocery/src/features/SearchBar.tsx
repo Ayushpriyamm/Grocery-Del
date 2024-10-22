@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     borderRadius: 15,
+    position : "static",
     height : 70,
     paddingHorizontal : 4,
     width: '100%',

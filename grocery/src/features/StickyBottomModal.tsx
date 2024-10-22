@@ -1,40 +1,57 @@
-import React, { FC } from "react"
-import { View,Text,StyleSheet } from "react-native"
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import BottomSheet,{BottomSheetView} from "@gorhom/bottom-sheet";
+import React, { useCallback, useMemo, useRef } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  BottomSheetModal,
+  BottomSheetView,
+  BottomSheetModalProvider,
+} from '@gorhom/bottom-sheet';
 
-interface StickyBottomModalProps {
-  onChange : (index : number) => void;
-  left : React.ReactNode;
-  active : boolean;
-  bottomSheetRef : React.RefObject<BottomSheet>;
-  children? : React.ReactNode
-}
+const StickyBottomModal = () => {
+  // ref
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
+  // callbacks
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
-export const StickyBottomModal : FC<StickyBottomModalProps> =  ({bottomSheetRef,active,left,onChange,children}) => {
+  // renders
+  return (
+    <BottomSheetModalProvider>
+      <GestureHandlerRootView style={styles.container}>
+        <Button
+          onPress={handlePresentModalPress}
+          title="Present Modal"
+          color="black"
+        />
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          onChange={handleSheetChanges}
+        >
+          <BottomSheetView style={styles.contentContainer}>
+            <Text>Awesome 🎉</Text>
+          </BottomSheetView>
+        </BottomSheetModal>
+      </GestureHandlerRootView>
+    </BottomSheetModalProvider>
+  );
+};
 
-  return(
-    <GestureHandlerRootView>
-      {left}
-      <BottomSheet ref={bottomSheetRef} onChange={onChange}>
-        {active && (
-        <BottomSheetView style={styles.contentContainer}>
-          {children}
-        </BottomSheetView>
-        )}
-      </BottomSheet>
-    </GestureHandlerRootView> 
-  )
-}
-
-export default StickyBottomModal;
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
+    backgroundColor: 'grey',
+  },
   contentContainer: {
     flex: 1,
-    position : 'absolute',
-    height : 600,
-    padding: 36,
     alignItems: 'center',
-  }
+  },
 });
+
+export default StickyBottomModal;

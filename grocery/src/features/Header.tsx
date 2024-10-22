@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
+    marginBottom : 20,
     paddingTop: Platform.OS === 'android' ? 10 : 5,
     justifyContent: 'space-between'
   },
