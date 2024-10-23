@@ -8,14 +8,16 @@ import { navigationRef } from "../utils/NavigationUtil";
 import ProductDashboard from "../features/ProductDashboard";
 import DeliveryDashboard from "../features/DeliveryDashboard";
 import SearchPage from "../features/SearchPage";
-
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
 
 const Stack = createNativeStackNavigator();
 
-
+const queryClient = new QueryClient();
 const Navigation: FC = () => {
   return (
-
+    <QueryClientProvider queryClient={queryClient}>
+    <GestureHandlerRootView>
   <NavigationContainer ref={navigationRef} independent={true}>
       <Stack.Navigator
         initialRouteName="SplashScreen"
@@ -40,6 +42,8 @@ const Navigation: FC = () => {
         <Stack.Screen name="Search"   component={SearchPage} />
       </Stack.Navigator>
     </NavigationContainer>
+    </GestureHandlerRootView>
+    </QueryClientProvider>
   )
 }
 
