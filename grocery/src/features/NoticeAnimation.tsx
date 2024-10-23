@@ -4,15 +4,16 @@ import { NoticeHeight } from './Scaling';
 import Notice from './Notice';
 interface NoticeAnimationProps {
   noticePosition: any;
+  active : boolean;
   children: React.ReactElement
 }
 
 
 const NOTICE_HEIGHT = -(NoticeHeight + 12)
 
-export const NoticeAnimation: FC<NoticeAnimationProps> = ({ noticePosition, children }) => {
+export const NoticeAnimation: FC<NoticeAnimationProps> = ({ noticePosition,active, children }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, active ? { backgroundColor: "#C5C6D0" } : { backgroundColor: "transparent" }]}>
       <RNAnimated.View style={[styles.noticeContainer, {
         transform: [{
           translateY: noticePosition

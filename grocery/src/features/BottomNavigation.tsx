@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     backgroundColor: 'white',
     width: "100%",
+    zIndex : 999,
     height: 60,
     flexDirection: 'row',
     justifyContent: 'space-around',

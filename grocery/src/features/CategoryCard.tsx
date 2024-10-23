@@ -1,31 +1,23 @@
-import { View, Image, StyleSheet,TouchableOpacity } from "react-native";
+import {  Image, StyleSheet,TouchableOpacity } from "react-native";
 import CustomText from "./CustomText";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Fonts } from "../utils/Constants";
-import { FC, SetStateAction,Dispatch} from "react";
-import BottomNavigation from "./BottomNavigation";
-import StickyBottomModal from "./StickyBottomModal";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { FC} from "react";
+
 
 
 
 interface CategoryCardProps {
   name: string;
   path: any; 
-  active : boolean;
-  setActive : Dispatch<SetStateAction<boolean>>
+  onPress: (present : any) => void;
 }
 
-export const CategoryCard: FC<CategoryCardProps> = ({ name, path,active,setActive }) => {
- const tapGesture = Gesture.Tap().onEnd(() => {
-    setActive((prevActive) => !prevActive); // Toggle the active state on tap
-  });
-
+export const CategoryCard: FC<CategoryCardProps> = ({ name,onPress, path }) => {
 
   return (
     <>
-   
-    <TouchableOpacity style={styles.container} onPress={() => setActive(!active)}>
+    <TouchableOpacity style={styles.container} onPress={(product : any) => onPress(product)}>
       <Image 
         source={path} 
         style={styles.image} 
@@ -39,6 +31,7 @@ export const CategoryCard: FC<CategoryCardProps> = ({ name, path,active,setActiv
         {name}
       </CustomText>
     </TouchableOpacity> 
+
     </>
   );
 }
