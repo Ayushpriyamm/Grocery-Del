@@ -65,7 +65,6 @@ export const ProductDashboard: FC = () => {
 
    return (
     <BottomSheetModalProvider>
-      <GestureHandlerRootView>
       <NoticeAnimation noticePosition={noticePosition}>
         <>
           <Visuals />
@@ -74,9 +73,6 @@ export const ProductDashboard: FC = () => {
           <StickSearchBar />
         </>
       </NoticeAnimation> 
-
-      <AdCarousel />
-
       <ScrollView style={styles.screen}>
         <View style={styles.productContainer}>
           <View style={styles.text}>
@@ -119,13 +115,7 @@ export const ProductDashboard: FC = () => {
 
           <ScrollX> 
             <View style={styles.panelContainer}> 
-              {categories.map((data: any, index: any) => (
-                  <>
-              <Button
-                onPress={handlePresentModalPress}
-               title="Present Modal"
-                color="black"
-              />
+              {categories.map((data: any, index: any) => ( 
                   <CategoryCard
                     key={index}
                     active={active}
@@ -133,13 +123,12 @@ export const ProductDashboard: FC = () => {
                     name={data.name}
                     path={data.image} 
                   /> 
-              </>
               ))}
             </View>
           </ScrollX>  
         </View>
       </ScrollView>
-   <BottomSheetModal
+       <BottomSheetModal
           ref={bottomSheetModalRef}
           onChange={handleSheetChanges}
         >
@@ -148,7 +137,7 @@ export const ProductDashboard: FC = () => {
           </BottomSheetView>
         </BottomSheetModal>
       <BottomNavigation />
-      </GestureHandlerRootView>
+
     </BottomSheetModalProvider>
   );
 };

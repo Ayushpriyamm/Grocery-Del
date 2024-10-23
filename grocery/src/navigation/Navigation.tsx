@@ -13,10 +13,12 @@ import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
 
 const Stack = createNativeStackNavigator();
 
+
 const queryClient = new QueryClient();
+
 const Navigation: FC = () => {
   return (
-  <QueryClientProvider queryClient={queryClient}>
+    <QueryClientProvider client={queryClient}>
   <GestureHandlerRootView>
   <NavigationContainer ref={navigationRef} independent={true}>
       <Stack.Navigator
