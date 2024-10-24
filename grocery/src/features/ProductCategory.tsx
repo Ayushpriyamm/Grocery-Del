@@ -1,10 +1,10 @@
-import React, { FC } from "react"
+import React, { FC, useRef } from "react"
 import CustomText from "./CustomText"; 
-import { View,ScrollView,StyleSheet } from "react-native";
+import { View,ScrollView,StyleSheet, Animated } from "react-native";
 import { Fonts } from "../utils/Constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import SideBarCard from "./SideBarCard";
-import { screenHeight } from "./Scaling";
+import { screenHeight, screenWidth } from "./Scaling";
 
 interface ProductCategoryProps {
   product : string;
@@ -12,35 +12,45 @@ interface ProductCategoryProps {
 
 
 export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
+  const scrollRef = useRef<ScrollView>(null);
   return(
   <>
-  <CustomText variant="h1" style={[{
+      <CustomText variant="h1" style={[{
               textAlign : "center"
             }]}
             fontSize={RFValue(12)}
             fontFamily={Fonts.SemiBold}>
               {product} 
-          </CustomText> 
-          <View style={styles.screenFlex}>
-              <ScrollView scrollEnabled={true} style={[
-                {
-                  flexDirection : "column",
-                  zIndex : 100,
-                  gap : 40,
-                  height : screenHeight,
-                }
-              ]}>
-               <SideBarCard active={true} name={product} image={require("../../assets/category/1.png")}/>             
-               <SideBarCard active={false} name={product} image={require("../../assets/category/1.png")}/> 
-              </ScrollView>
-              <ScrollView>
-                <CustomText>Side 2</CustomText>
-              </ScrollView>
-          </View>
-    </>
+          </CustomText>
+      <View style={styles.sideBar}>
+        <ScrollView ref={scrollRef} contentContainerStyle={{paddingTop : 50}} showsVerticalScrollIndicator={false}>
+          <Animated.View>
+            {Array.from({ length : 40}).map((_ : any,index : number) => {
+                return <SideBarCard key={index} name={product} image={require("../../assets/products/1.png")} active={true} />
+            })}
+          </Animated.View>
+        </ScrollView>
+      </View>
+       </>
   );
 }
 const styles = StyleSheet.create({
+  sideBar : {
+    width : "24%",
+    backgroundColor : ' #fff',
+    borderRightWidth : 0.8,
+    borderRightColor : '#eee',
+    position : 'relative'
+  },
+  scrollView : {
+   flexDirection : "column",
+   zIndex : 999,
+   position : 'absolute',
+   gap : 40,
+   width : screenWidth * 0.3,
+   borderRightColor : 'green',
+  borderRightWidth : 4,              
+  },
    screenFlex : {
     display: 'flex',
     flexDirection : "row"

@@ -132,8 +132,7 @@ export const ProductDashboard: FC = () => {
           </ScrollX>  
         </View>
       </ScrollView> 
-      <BottomNavigation />
-      {active && (
+          {active && (
       <BottomSheetModal
           ref={bottomSheetModalRef}
           onChange={handleSheetChanges}
