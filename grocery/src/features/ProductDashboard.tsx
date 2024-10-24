@@ -17,6 +17,7 @@ import { categories, imageData } from "../utils/dummyData";
 import BottomNavigation from "./BottomNavigation";
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from "@gorhom/bottom-sheet";
 import { SideBarCard } from "./SideBarCard";
+import { ProductCategory } from "./ProductCategory";
 
 const NOTICE_HEIGHT = -(NoticeHeight + 12);
 
@@ -61,7 +62,7 @@ export const ProductDashboard: FC = () => {
   }, []);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const [product,setProduct] = useState<any>(null);
+  const [product,setProduct] = useState<string>('');
   const handlePresentModalPress = useCallback((p : any) => {
     setProduct(p.name);
     setActive(true);
@@ -138,29 +139,7 @@ export const ProductDashboard: FC = () => {
           onChange={handleSheetChanges}
         >
           <BottomSheetView style={styles.bottomSheet}>
-           <CustomText variant="h1" style={[{
-              textAlign : "center"
-            }]}
-            fontSize={RFValue(12)}
-            fontFamily={Fonts.SemiBold}>
-              {product} 
-          </CustomText> 
-          <View style={styles.screenFlex}>
-              <ScrollView scrollEnabled={true} style={[
-                {
-                  flexDirection : "column",
-                  zIndex : 100,
-                  gap : 40,
-                  height : screenHeight,
-                }
-              ]}>
-               <SideBarCard active={true} name={product} image={require("../../assets/category/1.png")}/>             
-               <SideBarCard active={false} name={product} image={require("../../assets/category/1.png")}/> 
-              </ScrollView>
-              <ScrollView>
-                <CustomText>Side 2</CustomText>
-              </ScrollView>
-          </View>
+           <ProductCategory product={product} /> 
           </BottomSheetView>
         </BottomSheetModal>
     )}
