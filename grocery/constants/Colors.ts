@@ -4,7 +4,7 @@
  */
 export const Colors = {
   primary: {
-    background: '#FFD700'
+    background: '#528357'
   },
   disabled: "#A9A9A9",
   secondary: "#007A33",
