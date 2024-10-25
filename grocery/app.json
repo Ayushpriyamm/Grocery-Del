@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "BlinkIt",
-    "slug": "BlinkIt",
+    "name": "Basketry",
+    "slug": "basketry",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/basketrylogo.png",
+    "icon": "./assets/images/basketryLogo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/basketrylogo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#528357"
     },
     "ios": {
       "supportsTablet": true
@@ -30,7 +30,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/logo.png"
+      "favicon": "./assets/images/basketryLogo.png"
     },
     "plugins": [
       "expo-router",

@@ -88,7 +88,7 @@ export const CustomerLogin: FC = () => {
                 keyboardDismissMode={'on-drag'}>
                 <LinearGradient colors={bottomColors} style={styles.gradient} />
                 <View style={styles.content}>
-                  <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
+                  <Image source={require('../../assets/images/baskteryLogo.png')} style={styles.logo} />
                   <CustomText variant='h2' fontFamily={Fonts.SemiBold}>
                     India's last minute app
                   </CustomText>
