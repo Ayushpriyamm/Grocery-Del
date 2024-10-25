@@ -1,11 +1,62 @@
 import User from "../models/userModel.js";
 import { validationResult } from "express-validator";
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import { generateToken } from "../utlis/generateToken.js";
 import DeliveryBoy from "../models/deliveryBoy.js";
+import admin from "../../firebase.js";
+
+export const verifyOtpAndIssueJwt = async (req, res) => {
+    //frontend req k data m y do value hongi
+    const { firebaseToken, role } = req.body;
+
+    try {
+        //1 verfy firebase token
+        const decodeToken = await admin.auth().verifyIdToken(firebaseToken);
+        const firebaseUid = decodeToken.uid;
+
+        let user;
+
+        // 2. Checking if it's a Delivery Boy or a Customer
+        if (role === 'DeliveryBoy') {
+            user = await DeliveryBoy.findOne({ firebaseUid });
+            if (!user) {
+                return res.status(404).json({ message: "Delivery boy not found. Contact admin for access." });
+            }
+        } else {
+            user = await User.findOne({ firebaseUid });
+
+            if (!user) {
+                const randomUsername = 'USER' + Math.floor(1000 + Math.random() * 9000);
+                user = await User.create({
+                    mobile: decodeToken.phone_number,
+                    firebaseUid,
+                    role: 'Customer',
+                    name:randomUsername
+                })
+            } else {
+                 return res.status(400).json({ message: "Invalid role specified." });
+            }
+            
+        }
+
+        const token = generateToken(user);
+
+        res.status(200).json({
+            token,
+            message: "Login successful",
+            user,
+        })
+
+    } catch (error) {
+        console.error("Firebase token verification error: ", error);
+        return res.status(500).json({ message: "Firebase token verification failed", error: error.message });
+  
+    }
 
 
+
+
+}
 
 export const signup =async (req, res, next) => {
     const errors = validationResult(req);

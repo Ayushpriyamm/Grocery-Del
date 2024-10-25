@@ -1,8 +1,10 @@
 import express from "express";
 import {signinValidation, signupValidation} from "../middlewares/validator.js";
-import {deliveryBoy, signin, signup} from "../controllers/authController.js"
+import {deliveryBoy, signin, signup, verifyOtpAndIssueJwt} from "../controllers/authController.js"
 
 const router = express.Router();
+
+router.post('/login', verifyOtpAndIssueJwt);
 
 router.post('/signup', signupValidation, signup);
 router.post('/signin', signinValidation, signin);

@@ -12,17 +12,6 @@ const deliverBoySchema = new mongoose.Schema({
         required: true
     },
 
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-
-    password: {
-        type: String,
-        required: true
-    },
-
     role: {
         type: String,
         enum: ["DeliveryBoy"],
@@ -45,7 +34,12 @@ const deliverBoySchema = new mongoose.Schema({
     store: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"Store"
-    }
+    },
+
+    firebaseUid: {
+        type: String,
+        unique: true,
+    },
 
 })
 

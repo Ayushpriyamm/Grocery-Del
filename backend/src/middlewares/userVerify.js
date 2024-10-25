@@ -1,6 +1,22 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js';
 
+export const authorizeRoles = (...roles) => {
+    return (req, res, next) => {
+        const token = req.header('Authorization').replace('Bearer ', '');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+        if (!roles.include(decoded.role)) {
+            return res.status(403).json({ message: "Access denied, insufficient permissions" });
+
+        }
+
+        req.user = decoded;
+        next();
+        
+    }
+}
+
 export const verifyUser = async(req,res,next) => {
     let token;
 

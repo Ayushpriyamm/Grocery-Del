@@ -11,10 +11,6 @@ const userSchema =new mongoose.Schema({
         required:true
     },
 
-    password: {
-        type: String,
-        required:true
-    },
 
     role: {
         type: String,
@@ -34,7 +30,12 @@ const userSchema =new mongoose.Schema({
 
     address: {
         type:String
-    }
+    },
+
+    firebaseUid: {
+        type: String,
+        unique: true,
+    },
 
 })
 
