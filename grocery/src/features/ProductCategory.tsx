@@ -1,10 +1,12 @@
-import React, { FC, useRef } from "react"
+import React, { FC, useEffect, useRef } from "react"
 import CustomText from "./CustomText"; 
-import { View,ScrollView,StyleSheet, Animated } from "react-native";
+import { View,ScrollView,StyleSheet, Animated, useAnimatedValue } from "react-native";
 import { Fonts } from "../utils/Constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import SideBarCard from "./SideBarCard";
 import { screenHeight, screenWidth } from "./Scaling";
+import { useSharedValue } from "react-native-reanimated";
+import { categories } from "../utils/dummyData";
 
 interface ProductCategoryProps {
   product : string;
@@ -13,9 +15,13 @@ interface ProductCategoryProps {
 
 export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
   const scrollRef = useRef<ScrollView>(null);
+  const indicatorPosition = useSharedValue(0);
+  const scrollViewRef = useRef<ScrollView>(null);
+  const animatedValues = categories.map(() => useSharedValue(0));
+ 
   return(
   <>
-      <CustomText variant="h1" style={[{
+          <CustomText variant="h1" style={[{
               textAlign : "center"
             }]}
             fontSize={RFValue(12)}
@@ -25,13 +31,13 @@ export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
       <View style={styles.sideBar}>
         <ScrollView ref={scrollRef} contentContainerStyle={{paddingTop : 50}} showsVerticalScrollIndicator={false}>
           <Animated.View>
-            {Array.from({ length : 40}).map((_ : any,index : number) => {
-                return <SideBarCard key={index} name={product} image={require("../../assets/products/1.png")} active={true} />
+            {categories.map((data : any,index : number) => {
+                return <SideBarCard key={index} name={product} image={data.image} active={true} />
             })}
           </Animated.View>
         </ScrollView>
       </View>
-       </>
+     </>
   );
 }
 const styles = StyleSheet.create({
