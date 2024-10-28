@@ -21,8 +21,8 @@ export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
  
   return(
   <>
-          <CustomText variant="h1" style={[{
-              textAlign : "center"
+    <CustomText variant="h1" style={[{
+           textAlign : "center"
             }]}
             fontSize={RFValue(12)}
             fontFamily={Fonts.SemiBold}>

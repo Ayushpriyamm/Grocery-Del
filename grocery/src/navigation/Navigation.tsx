@@ -10,6 +10,7 @@ import DeliveryDashboard from "../features/DeliveryDashboard";
 import SearchPage from "../features/SearchPage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
+import OtpPage from "../features/OtpPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,9 +19,9 @@ const queryClient = new QueryClient();
 
 const Navigation: FC = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-  <GestureHandlerRootView>
-  <NavigationContainer ref={navigationRef} independent={true}>
+  <QueryClientProvider client={queryClient}>
+   <GestureHandlerRootView>
+    <NavigationContainer ref={navigationRef} independent={true}>
       <Stack.Navigator
         initialRouteName="SplashScreen"
         screenOptions={{
@@ -41,8 +42,20 @@ const Navigation: FC = () => {
           }}
           name="DeliveryLogin"
           component={DeliveryLogin} />
-        <Stack.Screen name="Search"   component={SearchPage} />
-      </Stack.Navigator>
+        <Stack.Screen 
+          options={{
+            animation: 'fade'
+          }}
+         name="Search" 
+        component={SearchPage} 
+        />
+        <Stack.Screen
+        options={{
+            animation: 'fade'
+        }}
+        name="LoginOtp"
+        component={OtpPage} />
+       </Stack.Navigator>
     </NavigationContainer>
     </GestureHandlerRootView>
     </QueryClientProvider>

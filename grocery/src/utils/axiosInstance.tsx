@@ -1,23 +1,16 @@
 import axios from "axios";
-import {
-  adminToken,
-  clientToken,
-  currentAdmin,
-  currentUser,
-  isSuperAdmin,
-} from "./localStorageKeys";
+
 
 export const baseUrlExport =
   "http://HF-Bac-MyALB-v5G3lE42ysVp-462563829.ap-south-1.elb.amazonaws.com/api/v1/";
 export const baseUrlExport1 = "http://52.66.89.229:5000/";
 export const baseUrlExportNgRok = "https://53fe-106-222-237-121.ngrok-free.app";
-export const localBackend = "http://localhost:5000/";
+export const localBackend = "http://localhost:5000/api/";
 
 const instance = axios.create({
   baseURL: localBackend,
   headers: {
     "Content-Type": "application/json",
-    "ngrok-skip-browser-warning": "123",
   },
 });
 

@@ -13,43 +13,18 @@ import useKeyboardOffsetHeight from '@/hooks/useKeyboardOffsetHeight';
 import { Colors } from '../../constants/Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { LinearGradient } from 'expo-linear-gradient';
-import firestore from "@react-native-firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
-import auth from "@react-native-firebase/auth";
-import app from '@/FireBaseConfig';
+import mmkvStorage from '../state/storage';
+import { useMutation } from '@tanstack/react-query';
+import { postData } from '../utils/apiHandler';
+import { authRoutes } from '../utils/apiRoutes';
+
 
 
 export const CustomerLogin: FC = () => {
   const [phoneNo, setphoneNo] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [code,setCode] = useState<any>(null);
-  const [confirm,setConfirm] = useState<any>(null);
-  const navigation = useNavigation();
 
-   
-  const signinWithPhoneNumber = async () => {
-    try{
-      //init app;
-   
-      const confirmation = await auth().signInWithPhoneNumber(phoneNo);
-      console.log(confirmation);
-      setConfirm(confirmation);
-    }catch(error){
-         console.log("Error sending code : ",error);
-    }
-  };
-   const confirmCode = async () => {
-    try{
-      const userCredential = await confirm.confirm(code);
-      console.log(userCredential);
-      const { user } = userCredential;
-      const userDocument = await firestore().collection("users").doc(user.uid);
-
-       console.log(userDocument); 
-    }catch(error){
-      console.log("Invalid Code",error);
-    }
-  }
   const keyboardOffsetHeight = useKeyboardOffsetHeight();
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -63,17 +38,27 @@ export const CustomerLogin: FC = () => {
       }).start();
     }
   }, []);
-
+  const signin = useMutation({
+    mutationKey : ["signin"],
+    mutationFn : async () => {
+      const body  = {
+        phone : phoneNo
+      }
+      return await postData(authRoutes.sendOtp,{},body);
+    },
+    onSuccess : (data : any) => {
+      console.log(data);
+      setLoading(false);
+      resetAndNavigate('LoginOtp');
+      mmkvStorage.setItem('phone',phoneNo);
+    }
+  });
   const handleAuth = async () => {
     Keyboard.dismiss();
-    setLoading(true);
-    resetAndNavigate('ProductDashboard');
-    setLoading(false);
-    try {
-
-    } catch (error) {
-
-    }
+   /* setLoading(true);
+    signin.mutate(); 
+    */
+     resetAndNavigate("ProductDashboard");
   }
   const [gestureSequence, setgestureSeuquence] = useState<string[]>([]);
   const handleGesture = ({ nativeEvent }: any) => {

@@ -6,7 +6,7 @@ import DeliveryBoy from "../models/deliveryBoy.js";
 
 
 
-export const signup =async (req, res, next) => {
+export const signup = async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
