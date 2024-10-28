@@ -7,7 +7,7 @@ export const generateToken = (user) => {
             role: user.role,
         };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '90d' });
         return token;
     } catch (error) {
         console.error('Error generating token:', error);
