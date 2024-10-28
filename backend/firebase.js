@@ -17,7 +17,7 @@ try {
     serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf8'));
 } catch (error) {
     console.error('Failed to load service account key:', error);
-    process.exit(1); // Exit the process if the key cannot be loaded
+    throw new Error('Firebase Admin SDK initialization failed');
 }
 
 // Initialize Firebase Admin SDK

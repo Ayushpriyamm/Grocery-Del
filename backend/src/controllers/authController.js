@@ -3,7 +3,15 @@ import { validationResult } from "express-validator";
 import bcrypt from 'bcrypt';
 import { generateToken } from "../utlis/generateToken.js";
 import DeliveryBoy from "../models/deliveryBoy.js";
-import admin from "../../firebase.js";
+
+//import admin from "../../firebase.js";
+
+
+//first implement the Send OTP functionality
+
+//genertae OTP using otp-generator
+
+//second implement the Verify OTP functionality
 
 export const verifyOtpAndIssueJwt = async (req, res) => {
     //frontend req k data m y do value hongi
