@@ -10,8 +10,6 @@ const userSchema =new mongoose.Schema({
         unique:true,
         required:true
     },
-
-
     role: {
         type: String,
         enum: ["Admin", "Customer", "DeliveryBoy"],
@@ -30,11 +28,6 @@ const userSchema =new mongoose.Schema({
 
     address: {
         type:String
-    },
-
-    firebaseUid: {
-        type: String,
-        unique: true,
     },
 
 })

@@ -36,11 +36,6 @@ const deliverBoySchema = new mongoose.Schema({
         ref:"Store"
     },
 
-    firebaseUid: {
-        type: String,
-        unique: true,
-    },
-
 })
 
 const DeliveryBoy = mongoose.model("DeliveryBoy", deliverBoySchema);
