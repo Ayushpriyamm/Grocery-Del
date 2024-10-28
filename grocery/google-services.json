@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "255574846921",
+    "project_id": "basketary-f7422",
+    "storage_bucket": "basketary-f7422.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255574846921:android:6736185a09a8ace555cc18",
+        "android_client_info": {
+          "package_name": "com.ravenx.basketry"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkx4yfi0svHoI7UDCscsyr5ssOQB6r7hY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

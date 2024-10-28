@@ -3,7 +3,7 @@ import ProductSlider from '@/src/features/ProductSlider';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Image, Animated, SafeAreaView, Keyboard } from 'react-native';
 import { GestureHandlerRootView, PanGestureHandler, State } from "react-native-gesture-handler";
-import { resetAndNavigate } from '../utils/NavigationUtil';
+import { navigate, resetAndNavigate } from '../utils/NavigationUtil';
 import CustomInput from './CustomInput';
 import CustomText from './CustomText';
 import { Fonts, lightColors } from '../utils/Constants';
@@ -13,11 +13,43 @@ import useKeyboardOffsetHeight from '@/hooks/useKeyboardOffsetHeight';
 import { Colors } from '../../constants/Colors';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { LinearGradient } from 'expo-linear-gradient';
+import firestore from "@react-native-firebase/firestore";
+import { useNavigation } from '@react-navigation/native';
+import auth from "@react-native-firebase/auth";
+import app from '@/FireBaseConfig';
 
 
 export const CustomerLogin: FC = () => {
   const [phoneNo, setphoneNo] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [code,setCode] = useState<any>(null);
+  const [confirm,setConfirm] = useState<any>(null);
+  const navigation = useNavigation();
+
+   
+  const signinWithPhoneNumber = async () => {
+    try{
+      //init app;
+   
+      const confirmation = await auth().signInWithPhoneNumber(phoneNo);
+      console.log(confirmation);
+      setConfirm(confirmation);
+    }catch(error){
+         console.log("Error sending code : ",error);
+    }
+  };
+   const confirmCode = async () => {
+    try{
+      const userCredential = await confirm.confirm(code);
+      console.log(userCredential);
+      const { user } = userCredential;
+      const userDocument = await firestore().collection("users").doc(user.uid);
+
+       console.log(userDocument); 
+    }catch(error){
+      console.log("Invalid Code",error);
+    }
+  }
   const keyboardOffsetHeight = useKeyboardOffsetHeight();
   const animatedValue = useRef(new Animated.Value(0)).current;
 

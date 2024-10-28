@@ -13,9 +13,11 @@
       "backgroundColor": "#528357"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ravenx.basketry"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/basketrylogo.png",
         "backgroundColor": "#FFD200"
@@ -25,7 +27,8 @@
         "android.permission.INTERNET",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION"
-      ]
+      ],
+      "package": "com.ravenx.basketry"
     },
     "web": {
       "bundler": "metro",
@@ -35,10 +38,17 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      "expo-build-properties"
+      "expo-build-properties",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b6b55434-5f37-4e5f-977c-967c59d7eec3"
+      }
     }
   }
 }
