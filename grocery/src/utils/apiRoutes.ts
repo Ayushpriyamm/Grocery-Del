@@ -1,6 +1,6 @@
 export const authRoutes = {
   signin : "/auth/signin",
-  sendOtp : "/otp/send-otp",
+  sendOtp : "/api/otp/send-otp",
   verifyOtp : "/otp/verify-otp"
 }
 export default {authRoutes}
