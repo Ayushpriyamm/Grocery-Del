@@ -23,7 +23,8 @@ const createAndStoreOtp = async (mobile) => {
 
 //funtion to send otp to registered mobile
 
-export const sendOtp =async (req, res) => {
+export const sendOtp = async (req, res) => {
+
     try {
         const { mobile } = req.body;
 

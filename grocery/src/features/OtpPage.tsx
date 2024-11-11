@@ -7,6 +7,9 @@ import OtpTextInput from 'react-native-text-input-otp';
 import CustomButton from "./CustomButton";
 import { Fonts } from "../utils/Constants";
 import mmkvStorage from "../state/storage";
+import { useMutation } from "@tanstack/react-query";
+import { resetAndNavigate } from "../utils/NavigationUtil";
+import { postData } from "../utils/apiHandler";
 
 export const OtpPage : FC = () =>{
   const [otp, setOtp] = useState('');
@@ -19,8 +22,26 @@ export const OtpPage : FC = () =>{
     setItem();
   },[phone])
   const [loading,setLoading] = useState<boolean>(false);
+ const verifyOtp = useMutation({
+    mutationKey : ["verify-otp"],
+    mutationFn : async () => {
+      const body  = {
+        otp
+      }
+      return await postData("/api/otp/verify-otp",{},body);
+    },
+    onSuccess : (data : any) => {
+      console.log(data?.data,"onSuccess");
+      setLoading(false);
+      resetAndNavigate('ProductDashboard'); 
+    },
+    onError : (error : any) => {
+      console.log(error.response,"Error");
+    }
+  });
   const handleAuth = () => {
     setLoading(true);
+     verifyOtp.mutate();
   }
   return(
     <View style={styles.otpPage}>
@@ -43,7 +64,7 @@ export const OtpPage : FC = () =>{
         otp={otp}
         fontStyle={styles.input}
         setOtp={setOtp}
-        digits={4}
+        digits={6}
       />
       <CustomText>Didnt you receive any code?</CustomText>
       <CustomText fontFamily={Fonts.SemiBold} style={styles.text}>Resend New Code</CustomText>
@@ -51,7 +72,7 @@ export const OtpPage : FC = () =>{
           onPress={() => handleAuth()}
          title='Submit'
          loading={loading}
-         disabled={otp?.length != 4}
+         disabled={otp?.length != 6}
       />
  
     </View>

@@ -3,7 +3,7 @@ import AdminJSExpress from "@adminjs/express";
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import User from "../src/models/userModel.js";
 import DeliveryBoy from "../src/models/deliveryBoy.js";
-import Admin from "../src/models/AdminModel.js";
+import Admin from "../src/models/adminModel.js";
 import Store from "../src/models/storeModel.js";
 import Category from "../src/models/categoryModel.js";
 import Product from "../src/models/product.js";

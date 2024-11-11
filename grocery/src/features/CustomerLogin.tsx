@@ -18,7 +18,7 @@ import mmkvStorage from '../state/storage';
 import { useMutation } from '@tanstack/react-query';
 import { postData } from '../utils/apiHandler';
 import { authRoutes } from '../utils/apiRoutes';
-//import axios from 'axios';
+import axios from 'axios';
 
 
 
@@ -43,12 +43,12 @@ export const CustomerLogin: FC = () => {
     mutationKey : ["signin"],
     mutationFn : async () => {
       const body  = {
-        mobile : phoneNo
+        mobile : `+91 ${phoneNo}`
       }
-      return await axios.post("http://localhost:5000/api/otp/send-otp",body);
+      return await postData("/api/otp/send-otp",{},body);
     },
     onSuccess : (data : any) => {
-      console.log(data,"onSuccess");
+      console.log(data?.data,"onSuccess");
       setLoading(false);
       resetAndNavigate('LoginOtp');
       mmkvStorage.setItem('phone',phoneNo);
@@ -58,11 +58,11 @@ export const CustomerLogin: FC = () => {
     }
   });
   const handleAuth = async () => {
-    Keyboard.dismiss();
     //setLoading(true);
 
-    signin.mutate();   
-    //resetAndNavigate("ProductDashboard");
+    signin.mutate();  
+
+    //resetAndNavigate("ProductDashboard"); 
   }
   const [gestureSequence, setgestureSeuquence] = useState<string[]>([]);
   const handleGesture = ({ nativeEvent }: any) => {

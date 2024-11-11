@@ -9,11 +9,22 @@ import categoryRoute from './src/routes/categoryRoute.js';
 import orderRoute from './src/routes/orderRoute.js';
 import locationRoute from './src/routes/userAddressRoute.js'
 import otpRoute from './src/routes/otpRoute.js';
+import morgon from "morgan";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+const corsOptions = {
+  origin: '*', 
+  credentials: true, 
+};
+
+app.use(cors(corsOptions));
+
+app.use(morgon("common"));
 
 // Log server start
 console.log('Starting server...');
