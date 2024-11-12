@@ -92,7 +92,7 @@ export const verifyOtp = async(req,res) => {
             token,
             user: {
                 id: user._id,
-                name:randomUsername,
+                name:user.name,
                 mobile: user.mobile,
                 role: user.role,
             },
