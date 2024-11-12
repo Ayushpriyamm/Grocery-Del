@@ -60,9 +60,9 @@ export const CustomerLogin: FC = () => {
   const handleAuth = async () => {
     //setLoading(true);
 
-    signin.mutate();  
+    //signin.mutate();  
 
-    //resetAndNavigate("ProductDashboard"); 
+    resetAndNavigate("ProductDashboard"); 
   }
   const [gestureSequence, setgestureSeuquence] = useState<string[]>([]);
   const handleGesture = ({ nativeEvent }: any) => {

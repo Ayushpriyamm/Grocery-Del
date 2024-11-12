@@ -19,7 +19,7 @@ export const CategoryCard: FC<CategoryCardProps> = ({ name,onPress, path }) => {
     <>
     <TouchableOpacity style={styles.container} onPress={(product : any) => onPress(product)}>
       <Image 
-        source={path} 
+        source={{uri : path}} 
         style={styles.image} 
         resizeMode="cover" 
       />

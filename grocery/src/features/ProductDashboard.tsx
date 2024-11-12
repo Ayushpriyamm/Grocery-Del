@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { StyleSheet, Animated as RNAnimated, View,Button, ScrollView, Alert } from "react-native";
+import { StyleSheet, Animated as RNAnimated, View,Button, ScrollView, Alert, ActivityIndicator } from "react-native";
 import NoticeAnimation from "./NoticeAnimation";
 import { NoticeHeight, screenHeight, screenWidth } from "./Scaling";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,12 +12,13 @@ import CustomText from "./CustomText";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Fonts } from "../utils/Constants";
 import CategoryCard from "./CategoryCard";
-import { AdCarousel } from "./AdCarousel";
 import { categories, imageData } from "../utils/dummyData";
-import BottomNavigation from "./BottomNavigation";
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from "@gorhom/bottom-sheet";
-import { SideBarCard } from "./SideBarCard";
 import { ProductCategory } from "./ProductCategory";
+import { useQuery } from "@tanstack/react-query";
+import { getData } from "../utils/apiHandler";
+import { CategoryProps } from "../interfaces/CategoryInterface";
+import { resetAndNavigate } from "../utils/NavigationUtil";
 
 const NOTICE_HEIGHT = -(NoticeHeight + 12);
 
@@ -60,14 +61,16 @@ export const ProductDashboard: FC = () => {
  const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
-
+  const {data : getAllCategories,isFetched : isFetchedCategories,isLoading : isLoadingCategory} = useQuery({
+     queryKey : ["getAllCategories"],
+     queryFn : () => {
+           return getData("/api/catergory/all-categories",{});
+     }
+   })
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [product,setProduct] = useState<string>('');
   const handlePresentModalPress = useCallback((p : any) => {
-    setProduct(p.name);
-    setActive(true);
-    console.log(product);
-    bottomSheetModalRef.current?.present();
+     resetAndNavigate(`Product`,{id : p._id}); 
   }, []);
    return (
     <BottomSheetModalProvider>
@@ -97,15 +100,18 @@ export const ProductDashboard: FC = () => {
           </View>
 
           <ScrollX>
-            <View style={styles.panelContainer}> 
-              {imageData.map((data: any, index: number) => (
-                <ProductCard 
-                  name={"Product Name"} 
-                  image={data}
+            <View style={styles.panelContainer}>  
+           <View style={styles.panelContainer}> 
+              {categories.map((data: any, index: any) => ( 
+                 <ProductCard 
+                  name={data.name} 
+                  image={data.image}
                   price={45}
                   key={index} 
                 />
               ))}
+            </View>
+
             </View>
           </ScrollX>
         </View>
@@ -119,15 +125,27 @@ export const ProductDashboard: FC = () => {
           </CustomText>
 
           <ScrollX> 
-            <View style={styles.panelContainer}> 
-              {categories.map((data: any, index: any) => ( 
-                  <CategoryCard
-                    key={index}
-                    onPress={() => handlePresentModalPress(data)}
-                   name={data.name}
-                    path={data.image} 
+           <View style={styles.panelContainer}>
+              {isLoadingCategory ? 
+                        <View style={{
+                              display : "flex",
+                              width : screenWidth,
+                              flexDirection : "column",
+                              justifyContent : "center",
+                              alignItems : "center"
+                          }}>
+                              <ActivityIndicator  size={"small"} color={"#000fff"} />
+                               <CustomText variant="body" fontFamily={Fonts.Regular}>Loading Categories...</CustomText>
+                        </View> : 
+               getAllCategories?.data?.categories?.map((data: CategoryProps, index: number) => (
+               <CategoryCard
+                  key={index}
+                  onPress={() => handlePresentModalPress(data)}
+                  name={data.name}
+                  path={data.image} 
                   /> 
-              ))}
+              ))
+            } 
             </View>
           </ScrollX>  
         </View>

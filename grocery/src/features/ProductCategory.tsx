@@ -26,8 +26,8 @@ export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
             }]}
             fontSize={RFValue(12)}
             fontFamily={Fonts.SemiBold}>
-              {product} 
-          </CustomText>
+          {product} 
+    </CustomText>
       <View style={styles.sideBar}>
         <ScrollView ref={scrollRef} contentContainerStyle={{paddingTop : 50}} showsVerticalScrollIndicator={false}>
           <Animated.View>

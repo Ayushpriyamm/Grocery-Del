@@ -11,6 +11,7 @@ import SearchPage from "../features/SearchPage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
 import OtpPage from "../features/OtpPage";
+import Product from "@/app/Product/[id]";
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,7 @@ const Navigation: FC = () => {
         }}
         name="LoginOtp"
         component={OtpPage} />
+        <Stack.Screen name="Product" component={Product} />
        </Stack.Navigator>
     </NavigationContainer>
     </GestureHandlerRootView>

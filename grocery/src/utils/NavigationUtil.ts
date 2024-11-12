@@ -25,11 +25,12 @@ export async function resetAndNavigate(routeName: string, params?: object) {
   navigationRef.isReady();
   console.log(navigationRef.isReady());
   if (navigationRef.isReady()) {
-    console.log(routeName);
+    console.log(routeName,params);
     return navigationRef.dispatch(CommonActions.reset({
       index: 0,
       routes: [{
-        name: routeName
+        name: routeName,
+        params : params
       }]
     }));
   }
