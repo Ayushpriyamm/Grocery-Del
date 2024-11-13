@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react"
+import React, { FC, useEffect, useRef, useState } from "react"
 import CustomText from "./CustomText"; 
 import { View,ScrollView,StyleSheet, Animated, useAnimatedValue } from "react-native";
 import { Fonts } from "../utils/Constants";
@@ -18,7 +18,7 @@ export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
   const indicatorPosition = useSharedValue(0);
   const scrollViewRef = useRef<ScrollView>(null);
   const animatedValues = categories.map(() => useSharedValue(0));
- 
+const [categoryId,setcategoryId] = useState<number>(9);
   return(
   <>
     <CustomText variant="h1" style={[{
@@ -32,7 +32,7 @@ export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
         <ScrollView ref={scrollRef} contentContainerStyle={{paddingTop : 50}} showsVerticalScrollIndicator={false}>
           <Animated.View>
             {categories.map((data : any,index : number) => {
-                return <SideBarCard key={index} name={product} image={data.image} active={true} />
+                return <SideBarCard category={categoryId} setCategory={setcategoryId} key={index} name={product} image={data.image} active={true} />
             })}
           </Animated.View>
         </ScrollView>

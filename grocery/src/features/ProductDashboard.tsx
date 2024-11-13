@@ -150,16 +150,6 @@ export const ProductDashboard: FC = () => {
           </ScrollX>  
         </View>
       </ScrollView> 
-          {active && (
-      <BottomSheetModal
-          ref={bottomSheetModalRef}
-          onChange={handleSheetChanges}
-        >
-          <BottomSheetView style={styles.bottomSheet}>
-           <ProductCategory product={product} /> 
-          </BottomSheetView>
-        </BottomSheetModal>
-    )}
     </BottomSheetModalProvider>
   );
 };

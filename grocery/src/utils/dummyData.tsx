@@ -153,6 +153,12 @@ export const categories = [
     name: "Cleaning Essentials",
     image: require('../../assets/category/8.png')
   },
+  {
+    id: 9,
+    name: "All",
+    image: require('../../assets/category/1.png'),
+    products: productsList
+  },
 ]
 
 

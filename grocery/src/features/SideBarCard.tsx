@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import CustomText from "./CustomText";
 import { View,Image, StyleSheet, Animated} from "react-native";
 import { Fonts } from "../utils/Constants";
@@ -8,13 +8,15 @@ import { RFValue } from "react-native-responsive-fontsize";
 interface SideBarCardProps {
   name : string,
   image : any,
+  category : number,
+  setCategory : Dispatch<SetStateAction<number>>,
   active : boolean
 }
 
 
-export const SideBarCard : FC<SideBarCardProps> = ({name,image,active}) =>{
+export const SideBarCard : FC<SideBarCardProps> = ({name,image,active,setCategory,category}) =>{
   return(
-    <TouchableOpacity activeOpacity={1}  style={[styles.card]}>
+    <TouchableOpacity onPress={() => setCategory(category)} activeOpacity={1}  style={[styles.card]}>
       <View style={styles.imageContainer}>
      <Animated.Image source={image}  style={[styles.image,,active ?  {backgroundColor : 'green'} : {backgroundColor : 'gray'}]} />
       <CustomText
