@@ -15,7 +15,7 @@ export const categories = [
         "https://res.cloudinary.com/dponzgerb/image/upload/v1723444869/category/uic8gcnbzknosdvva13o.png",
     },
     {
-      name: "Munchies",
+      name: "Munchies", 
       image:
         "https://res.cloudinary.com/dponzgerb/image/upload/v1723444869/category/vyakccm3axdyt8yei8wc.png",
     },

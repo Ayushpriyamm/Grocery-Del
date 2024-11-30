@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import CustomSafeAreaView from './CustomSafeAreaView';
 import { ScrollView } from 'react-native-gesture-handler';
 import { screenHeight } from './Scaling';
-import LottieView from 'lottie-react-native';
+//import LottieView from 'lottie-react-native';
 import CustomText from './CustomText';
 import { Fonts } from '../utils/Constants';
 import CustomInput from './CustomInput';
@@ -26,7 +26,7 @@ export const DeliveryLogin: FC = () => {
         <ScrollView keyboardShouldPersistTaps='handled' keyboardDismissMode='on-drag'>
           <View style={style.container}>
             <View style={style.lottieContainer}>
-              <LottieView autoPlay loop style={style.lottie} source={require('../../assets/animations/delivery_man.json')} />
+              {/* <LottieView autoPlay loop style={style.lottie} source={require('../../assets/animations/delivery_man.json')} /> */}
             </View>
             <CustomText variant='h3' style={style.text} fontFamily={Fonts.SemiBold}>
               Faster than Flashing
