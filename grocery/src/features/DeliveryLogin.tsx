@@ -26,7 +26,7 @@ export const DeliveryLogin: FC = () => {
         <ScrollView keyboardShouldPersistTaps='handled' keyboardDismissMode='on-drag'>
           <View style={style.container}>
             <View style={style.lottieContainer}>
-              <LottieView autoPlay loop style={style.lottie} source={require('../../assets/animations/delivery_man.json')} />
+         {/* <LottieView autoPlay loop style={style.lottie} source={require('../../assets/animations/delivery_man.json')} /> */}
             </View>
             <CustomText variant='h3' style={style.text} fontFamily={Fonts.SemiBold}>
               Faster than Flashing
