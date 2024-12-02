@@ -25,7 +25,7 @@ export const adData = [
   require('../../assets/products/c5.jpg'),
 ]
 
-const productsList =
+export const productsList =
   [
     {
       id: 1,

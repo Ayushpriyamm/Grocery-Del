@@ -9,10 +9,11 @@ import Animated from "react-native-reanimated";
 interface ProductCardProps {
   name : string,
   image : any,
+  styles? : any,
   price: number
 }
 
-export const ProductCard: FC<ProductCardProps> = ({name,image,price}) => {
+export const ProductCard: FC<ProductCardProps> = ({name,image,price,styles}) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
 
@@ -21,7 +22,7 @@ export const ProductCard: FC<ProductCardProps> = ({name,image,price}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[(styles && styles),styles.container]}>
       <Animated.Image
         source={image} style={styles.image} />
       <CustomText fontSize={RFValue(10)} variant="h3" fontFamily={Fonts.SemiBold}>{name}</CustomText>

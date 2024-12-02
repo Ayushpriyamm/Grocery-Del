@@ -35,18 +35,18 @@ export default SideBarCard;
 
 const styles = StyleSheet.create({
   card : {
-    padding : 10,
+    padding : 5,
     height : 100,
     paddingVertical : 0,
     justifyContent : 'center',
     alignItems : 'center',
-    width : '100%'
+    width : '100%',
+      borderRadius : 100
   },
   imageContainer : {
     borderRadius : 100,
-    height : '50%',
-    marginBottom : 10,
-    width : '75%',
+    height : '70%',
+    width : '100%',
     justifyContent : 'center',
     alignItems : 'center',
     backgroundColor : '#F3F47',
@@ -62,8 +62,7 @@ const styles = StyleSheet.create({
     top : 10,
     alignSelf : 'center',
     color : 'green',
-    borderTopLeftRadius : 15,
-    borderBottomLeftRadius : 15
+    borderRadius : 15,
   },
   image : {
     height : '80%',

@@ -21,14 +21,7 @@ export const ProductCategory : FC<ProductCategoryProps> = ({product}) => {
 const [categoryId,setcategoryId] = useState<number>(9);
   return(
   <>
-    <CustomText variant="h1" style={[{
-           textAlign : "center"
-            }]}
-            fontSize={RFValue(12)}
-            fontFamily={Fonts.SemiBold}>
-          {product} 
-    </CustomText>
-      <View style={styles.sideBar}>
+       <View style={styles.sideBar}>
         <ScrollView ref={scrollRef} contentContainerStyle={{paddingTop : 50}} showsVerticalScrollIndicator={false}>
           <Animated.View>
             {categories.map((data : any,index : number) => {
@@ -42,8 +35,8 @@ const [categoryId,setcategoryId] = useState<number>(9);
 }
 const styles = StyleSheet.create({
   sideBar : {
-    width : "24%",
-    backgroundColor : ' #fff',
+    width : "15%", 
+    backgroundColor : '#fff',
     borderRightWidth : 0.8,
     borderRightColor : '#eee',
     position : 'relative'
